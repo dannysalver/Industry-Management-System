@@ -1,0 +1,23 @@
+{
+  "name": "nimr-mabibo-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file=.env index.js",
+    "dev": "node --env-file=.env --watch index.js",
+    "migrate": "node --env-file=.env migrate.js",
+    "migrate:update": "node --env-file=.env migrate-update.js",
+    "seed": "node --env-file=.env seed.js",
+    "reset": "node --env-file=.env reset-data.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.13.0",
+    "uuid": "^10.0.0"
+  }
+}
