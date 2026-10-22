@@ -3,15 +3,6 @@
 -- Concurrency support: server-wide invoice sequence + duplicate-submit protection
 CREATE SEQUENCE IF NOT EXISTS invoice_seq;
 
-CREATE TABLE IF NOT EXISTS idempotency_keys (
-  key TEXT PRIMARY KEY,
-  user_id INT REFERENCES users(id),
-  endpoint VARCHAR(255),
-  status VARCHAR(20) DEFAULT 'in_progress',
-  response JSONB DEFAULT '{}'::jsonb,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
 CREATE TABLE IF NOT EXISTS roles (
   id SERIAL PRIMARY KEY,
   role VARCHAR(100) NOT NULL,
@@ -41,6 +32,15 @@ CREATE TABLE IF NOT EXISTS users (
   version INT NOT NULL DEFAULT 1,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS idempotency_keys (
+  key TEXT PRIMARY KEY,
+  user_id INT REFERENCES users(id),
+  endpoint VARCHAR(255),
+  status VARCHAR(20) DEFAULT 'in_progress',
+  response JSONB DEFAULT '{}'::jsonb,
+  created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS material_type (
