@@ -153,6 +153,4 @@ backend run side by side.
 | Sales Officer      | Sales, expenses, suppliers, clients and records               |
 | Accountant         | Sales, expenses, suppliers, clients and records               |
 
-## License
 
-This project was built for NIMR Mabibo. Add a license file if you intend to distribute it.
