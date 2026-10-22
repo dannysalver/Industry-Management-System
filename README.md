@@ -126,12 +126,16 @@ placeholder in place causes `password authentication failed for user "USER"`.
 
 ```bash
 # from the project root
+corepack enable    # activates the pinned Yarn version (skip if yarn is already available)
+
 yarn install
 
 cp .env.example .env   # optional for local development
 
 yarn start             # http://localhost:3000
 ```
+
+If you prefer npm: `npm install` and `npm run start`.
 
 Vite proxies `/api` and `/storage` to `http://localhost:5000`, so the frontend and
 backend run side by side.
