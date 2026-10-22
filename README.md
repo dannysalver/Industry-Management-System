@@ -1,6 +1,6 @@
 # IDMS - Production Management System
 
-A full-stack manufacturing ERP for **NIMR Mabibo**. It tracks raw materials, product
+A full-stack manufacturing ERP. It tracks raw materials, product
 recipes, production batches, stock movements, sales, expenses, suppliers, clients and
 users, with role-based access and live multi-user synchronisation.
 
@@ -70,13 +70,35 @@ The UI is built on the [Berry Material React](https://github.com/codedthemes/ber
 
 ## Getting Started
 
-### 1. Backend
+### 1. Database
+
+Create the PostgreSQL role and database before running the migrations. `npm run
+migrate` only applies `server/schema.sql`; it does not create the database.
+
+Connect as the PostgreSQL superuser:
+
+```bash
+sudo -u postgres psql
+```
+
+Then run (replace `choose-a-password` with a password of your choice):
+
+```sql
+CREATE USER nimr WITH PASSWORD 'choose-a-password';
+CREATE DATABASE nimr_mabibo OWNER nimr;
+\q
+```
+
+You can use a different role or database name, but the values must match
+`DATABASE_URL` in the next step.
+
+### 2. Backend
 
 ```bash
 cd server
 npm install
 
-# create the environment file and edit the values (USER and PASSWORD)
+# create the environment file and edit the values
 cp .env.example .env
 
 # create the schema and seed the default data
@@ -87,7 +109,20 @@ npm run seed
 npm run dev
 ```
 
-### 2. Frontend
+Edit `server/.env` and replace the placeholder credentials in `DATABASE_URL`
+with the role, password and database you created above, for example:
+
+```dotenv
+DATABASE_URL=postgresql://nimr:choose-a-password@localhost:5432/nimr_mabibo
+```
+
+Also set `JWT_SECRET` to a long random string. Leaving the `USER:PASSWORD`
+placeholder in place causes `password authentication failed for user "USER"`.
+
+`npm run seed` creates the default administrator account
+`admin@nimr.com` / `admin123`. Change this password after the first login.
+
+### 3. Frontend
 
 ```bash
 # from the project root
@@ -116,7 +151,7 @@ backend run side by side.
 | Variable       | Description                                              |
 | -------------- | -------------------------------------------------------- |
 | `PORT`         | API port (default `5000`)                                |
-| `DATABASE_URL` | PostgreSQL connection string                             |
+| `DATABASE_URL` | PostgreSQL connection string, e.g. `postgresql://nimr:password@localhost:5432/nimr_mabibo` |
 | `JWT_SECRET`   | Secret used to sign auth tokens (use a long random value) |
 
 > **Never commit real `.env` files.** Only the `.env.example` templates belong in Git.
@@ -152,5 +187,4 @@ backend run side by side.
 | Store Keeper       | Materials, products, stock and records                        |
 | Sales Officer      | Sales, expenses, suppliers, clients and records               |
 | Accountant         | Sales, expenses, suppliers, clients and records               |
-
 
