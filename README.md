@@ -76,7 +76,7 @@ The UI is built on the [Berry Material React](https://github.com/codedthemes/ber
 cd server
 npm install
 
-# create the environment file and edit the values
+# create the environment file and edit the values (USER and PASSWORD)
 cp .env.example .env
 
 # create the schema and seed the default data
