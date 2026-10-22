@@ -1,6 +1,6 @@
 # IDMS - Production Management System
 
-A full-stack manufacturing ERP. It tracks raw materials, product
+A full-stack manufacturing ERP for. It tracks raw materials, product
 recipes, production batches, stock movements, sales, expenses, suppliers, clients and
 users, with role-based access and live multi-user synchronisation.
 
@@ -32,7 +32,7 @@ users, with role-based access and live multi-user synchronisation.
 | --------- | ----------------------------------------------------------------- |
 | Frontend  | React 19, Vite 7, MUI 7, React Router 7, SWR, Axios-style `fetch` |
 | Backend   | Node.js (ESM), Express 4, PostgreSQL (`pg`), JWT, bcryptjs, multer |
-| Tooling   | ESLint, Prettier, Yarn 4                                           |
+| Tooling   | ESLint, Prettier, npm                                             |
 
 The UI is built on the [Berry Material React](https://github.com/codedthemes/berry-free-react-admin-template) template.
 
@@ -65,7 +65,7 @@ The UI is built on the [Berry Material React](https://github.com/codedthemes/ber
 ## Prerequisites
 
 - Node.js 20.6+ (required by Vite 7 and `node --env-file`)
-- Yarn 4 (via Corepack) or npm
+- npm (bundled with Node.js)
 - PostgreSQL 14+
 
 ## Getting Started
@@ -126,16 +126,12 @@ placeholder in place causes `password authentication failed for user "USER"`.
 
 ```bash
 # from the project root
-corepack enable    # activates the pinned Yarn version (skip if yarn is already available)
-
-yarn install
+npm install
 
 cp .env.example .env   # optional for local development
 
-yarn start             # http://localhost:3000
+npm run start          # http://localhost:3000
 ```
-
-If you prefer npm: `npm install` and `npm run start`.
 
 Vite proxies `/api` and `/storage` to `http://localhost:5000`, so the frontend and
 backend run side by side.
@@ -166,10 +162,10 @@ backend run side by side.
 
 | Command        | Description                     |
 | -------------- | ------------------------------- |
-| `yarn start`   | Start the dev server on `:3000` |
-| `yarn build`   | Production build to `dist/`     |
-| `yarn lint`    | Run ESLint                      |
-| `yarn prettier`| Format source files             |
+| `npm run start`| Start the dev server on `:3000` |
+| `npm run build`| Create a production build        |
+| `npm run lint` | Run ESLint                      |
+| `npm run prettier` | Format source files          |
 
 ### Backend (`server/`)
 
@@ -191,4 +187,3 @@ backend run side by side.
 | Store Keeper       | Materials, products, stock and records                        |
 | Sales Officer      | Sales, expenses, suppliers, clients and records               |
 | Accountant         | Sales, expenses, suppliers, clients and records               |
-
